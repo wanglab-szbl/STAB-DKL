@@ -33,7 +33,7 @@ source ~/.bashrc  # or ~/.zshrc if using zsh
 
 ### 2. Clone the Repository
 ```
-git clone https://github.com/RosettaCommons/RFantibody.git
+git clone git@github.com:gumingmu/STAB-DKL.git
 ```
 
 ### 3. Install MMseqs2
