@@ -355,3 +355,25 @@ This project is licensed under the MIT License. See the `LICENSE` file for detai
 
 # Citation
 If you use STAB-DKL in your research, please cite:
+
+
+## Acknowledgements
+
+STAB-DKL builds upon several excellent open-source tools and resources.
+
+- **ProteinMPNN** was used for extracting structure-related features.  
+  We include relevant components of ProteinMPNN in this repository for convenience.
+
+- **ESM2** was used to extract protein language model representations.
+
+- **MMseqs2** was used for MSA generation.
+
+We thank the authors of these tools for making their work publicly available.
+
+If you use STAB-DKL, please also consider citing the corresponding original works.
+
+### Related Resources
+
+- ProteinMPNN: https://github.com/dauparas/ProteinMPNN
+- ESM2: https://github.com/facebookresearch/esm
+- MMseqs2: https://github.com/soedinglab/MMseqs2
