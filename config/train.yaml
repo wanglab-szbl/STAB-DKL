@@ -1,0 +1,57 @@
+# Training Configuration
+
+# Model settings
+model:
+  out_dim: 2
+  grid_size: 100
+  dropout: 0.5
+  hidden_size: 1024
+
+# Training settings
+training:
+  epochs: 50
+  lr: [1e-2, 5e-3, 1e-3, 1e-4]
+  min_save_epoch: 30
+  lr_gp: 1e-2
+  betas: [0.9, 0.99]
+
+# Data settings
+data:
+  # Feature file paths
+  feature_paths:
+    ptmpnn: "data/features/ptmpnn.pt"
+    strucmsa: "data/features/strucmsa.pt"
+    esm2: "data/features/esm2.pt"
+
+# Dataset paths
+datasets:
+  # Training datasets (support multiple)
+  train:
+    curated_ddg: "data/train/C4238_tr.csv"
+    curated_dtm: "data/train/S2403_tr.csv"
+    ms_ddg: "data/train/Ms154_tp_60000.csv"
+  
+  # Validation datasets
+  valid:
+    - "data/valid/Ms20_500_tr_d.csv"
+    - "data/valid/Ms20_500_tr_r.csv"
+  
+  # Test datasets
+  test:
+    - "data/test/ssym_tr_d.csv"
+    - "data/test/ssym_tr_r.csv"
+    - "data/test/p53_tr_d.csv"
+    - "data/test/p53_tr_r.csv"
+    - "data/test/myoglobin_tr_d.csv"
+    - "data/test/myoglobin_tr_r.csv"
+    - "data/test/S669_tr_d.csv"
+    - "data/test/S669_tr_r.csv"
+
+# Experiment settings
+experiment:
+  seeds: [3, 4, 5]
+  save_dir: "weights/"
+  result_dir: "results/"
+
+# Device settings
+device: "cuda:0"

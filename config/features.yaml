@@ -1,0 +1,37 @@
+# Feature Extraction Configuration
+# input dataset files
+dataset_files:
+  - "data/train/C4238.csv"
+  - "data/train/S2403.csv"
+  - "data/train/Ms154_tp_60000.csv"
+  - "data/valid/Ms20_500_tr_d.csv"
+  - "data/valid/Ms20_500_tr_r.csv"
+  - "data/test/S669.csv"
+  - "data/test/p53.csv"
+  - "data/test/myoglobin.csv"
+  - "data/test/ssym.csv"
+
+# Data paths
+output_prefix: "data/features/"
+pdb_dir: "data/af3_pdb"
+
+# chain transformer to A
+force_chain_A: true 
+
+# MSA file path (if null, will generate using mmseqs2)
+msa_file: "data/features/msa/msa.fa"
+
+# MSA generation settings (used when msa_file is null)
+msa_generation:
+  use_gpu: true
+  max_seqs: 1000
+  threads: 22
+  mmseqs_cmd: "/home/DATA_2/hujiameng/tools/mmseqs-gpu/last/mmseqs/bin/mmseqs"
+  mmseqs_db: "/home/DATA_2/hujiameng/source/mmseqs/gpu/uniref90_DB_gpu"
+
+# strucmsa extraction settings
+feature_extraction:
+  n_jobs: 22
+
+# esm2 
+esm2_path: "/home/DATA_2/hujiameng/work/5.stability/ptModel/esm2_t33_650M_UR50D"
