@@ -13,7 +13,9 @@ For details on ThermoMPNN training and methodology, please see the accompanying 
 - [Model Training](#model-training)
 - [Project Structure](#project-structure)
 - [Citation](#citation)
+- [Acknowledgements](#ccknowledgements)
 - [License](#license)
+
 
 # Requirements
 ### GPU Acceleration
@@ -331,7 +333,7 @@ The repository is organized as follows:
 
 ```text
 STAB-DKL/
-├── data/                     # Mutation and structure files for train/val/test sets
+├── data/                    # Mutation and structure files for train/val/test sets
 ├── config/                  # YAML configs for feature extraction and training
 ├── dataset/                 # Dataset classes
 ├── model/                   # Model architecture
@@ -349,15 +351,10 @@ STAB-DKL/
 └── README.md
 ```
 
-# License
-
-This project is licensed under the MIT License. See the `LICENSE` file for details.
-
 # Citation
 If you use STAB-DKL in your research, please cite:
 
-
-## Acknowledgements
+# Acknowledgements
 
 STAB-DKL builds upon several excellent open-source tools and resources.
 
@@ -377,3 +374,7 @@ If you use STAB-DKL, please also consider citing the corresponding original work
 - ProteinMPNN: https://github.com/dauparas/ProteinMPNN
 - ESM2: https://github.com/facebookresearch/esm
 - MMseqs2: https://github.com/soedinglab/MMseqs2
+
+# License
+
+This project is licensed under the MIT License. See the `LICENSE` file for details.
