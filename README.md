@@ -170,9 +170,10 @@ python scripts/generate_mutation_file.py \
 | `--out_file` | Yes | Output path of the generated mutation input file. |
 
 
-### Mutation Input File Format
+### Custom Mutation Input File
 
-The mutation input file must contain the following columns.
+Alternatively, users can provide a custom mutation input file instead of using the provided mutation generation script.  
+The input file must contain mutation information in a tabular format (CSV/TSV) with required columns following the specifications below.
 
 #### Required columns
 
