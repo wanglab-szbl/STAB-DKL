@@ -17,30 +17,20 @@ import torch.nn as nn
 
 logger = logging.getLogger(__name__)
 
-
-class LightAttention(nn.Module):
-    """Lightweight attention module for feature processing."""
     
-    def __init__(self, input_size: int, kernel_size: int = 5, dropout: float = 0.25):
+class Feature_projection(nn.Module):
+    """Feature Projection module for feature processing."""
+    
+    def __init__(self, input_size: int, dropout: float = 0.25):
         """
-        Initialize LightAttention.
         
         Args:
             input_size: Input feature dimension
-            kernel_size: Convolution kernel size
             dropout: Dropout rate
         """
         super().__init__()
         
-        self.feature_conv = nn.Conv1d(
-            input_size, input_size, kernel_size,
-            stride=1, padding=kernel_size // 2
-        )
-        self.attention_conv = nn.Conv1d(
-            input_size, input_size, kernel_size,
-            stride=1, padding=kernel_size // 2
-        )
-        self.softmax = nn.Softmax(dim=-1)
+        self.fc = nn.Linear(input_size, input_size)
         self.dropout = nn.Dropout(dropout)
     
     def forward(self, x: torch.Tensor) -> torch.Tensor:
@@ -53,17 +43,14 @@ class LightAttention(nn.Module):
         Returns:
             Output tensor [batch_size, features]
         """
-        x = x.unsqueeze(-1)  # [B, F, 1]
-        features = self.dropout(self.feature_conv(x))
-        attention = self.attention_conv(x)
-        output = (features * self.softmax(attention)).squeeze(-1)
+        output = self.dropout(self.fc(x))
         return output
 
 
 class Mlp(nn.Module):
     """Multi-layer perceptron for dimensionality reduction."""
     
-    def __init__(self, input_size: int, out_size: int, dropout: float = 0.25, hidden_size: int = 1024):
+    def __init__(self, input_size: int, out_size: int, dropout: float = 0.25, hidden_size: int = 1280):
         """
         Initialize MLP.
         
@@ -115,7 +102,7 @@ class GPRegressionModel(gpytorch.models.ExactGP):
             train_x: Training features (can be None for prediction mode)
             train_y: Training labels (can be None for prediction mode)
             likelihood: GP likelihood
-            la: LightAttention network (can be None)
+            la: Feature_projection network (can be None)
             mlp: MLP for dimensionality reduction
             out_dim: Output dimension
             grid_size: Grid size for interpolation kernel
@@ -199,7 +186,7 @@ class STAB_DKL(nn.Module):
         self.hidden_size = hidden_size
         
         # Shared feature extractor
-        self.la = LightAttention(input_dim, dropout=dropout)
+        self.la = Feature_projection(input_dim, dropout=dropout)
         
         # Task-specific MLPs
         self.mlp_ddg = Mlp(input_dim, out_dim, dropout, hidden_size)

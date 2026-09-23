@@ -474,7 +474,7 @@ if __name__ == "__main__":
                 if dataset_name == "S11278":
                     filter_sub_df.to_csv(f"data/train/C{len_seq}.csv", index=False)
                 else:
-                    filter_sub_df.to_csv(f"data/train/S{len_seq}.csv", index=False)
+                    filter_sub_df.to_csv(f"data/train/Tm{len_seq}.csv", index=False)
             else:
                 filter_sub_df = test_df.loc[
                     (test_df['dataset_name'] == dataset_name) &

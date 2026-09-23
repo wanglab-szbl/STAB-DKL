@@ -6,3 +6,5 @@
 /data/features/
 /data/features.tar.gz
 /__init__.py
+/weights/
+/results/

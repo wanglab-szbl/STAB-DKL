@@ -96,7 +96,7 @@ Then activate the environment
 source .venv/bin/activate
 ```
 
-## 7. Download Features for Reproducing Model Training (Optional)
+### 7. Download Features for Reproducing Model Training (Optional)
 Precomputed training features used for model development are available on Zenodo: http.  
 This step is **optional** and is only required if you want to **reproduce model training**.  
 For standard inference and prediction tasks, downloading these features is **not necessary**.

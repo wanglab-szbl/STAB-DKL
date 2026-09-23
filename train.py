@@ -68,7 +68,7 @@ class Trainer:
         train_cfg = self.config['training']
         param_groups = self.model.get_trainable_params(
             lr_nn=float(train_cfg['lr']),
-            lr_gp=float(train_cfg.get('lr_gp', 5e-2))
+            lr_gp=float(train_cfg.get('lr_gp', 1e-2))
         )
         
         self.optimizer = torch.optim.Adam(
@@ -238,6 +238,7 @@ class Trainer:
                 x, y = data['x'], data['y']
                 pred, var = self.model.predict(x)
                 pred = pred / self.scale_pred
+                var = var / self.scale_pred**2
                 
                 # Calculate metrics
                 pearson = pearson_corrcoef(y, pred)
@@ -282,6 +283,7 @@ class Trainer:
             for name, data in self.dataset.pred_data.items():
                 pred, var = self.model.predict(data['x'])
                 pred = pred / self.scale_pred
+                var = var / self.scale_pred**2
                 
                 predictions.append(pd.DataFrame({
                     'dataset': name,

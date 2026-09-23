@@ -2,7 +2,7 @@
 # input dataset files
 dataset_files:
   - "data/train/C4238.csv"
-  - "data/train/S2403.csv"
+  - "data/train/Tm2403.csv"
   - "data/train/Ms154_tp_60000.csv"
   - "data/valid/Ms20_500_tr_d.csv"
   - "data/valid/Ms20_500_tr_r.csv"

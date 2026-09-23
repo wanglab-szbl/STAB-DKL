@@ -5,14 +5,14 @@ STAB_DKL: Stability prediction using Deep Kernel Learning
 """
 
 from .gp_model import (
-    LightAttention,
+    Feature_projection,
     Mlp,
     GPRegressionModel,
     STAB_DKL
 )
 
 __all__ = [
-    'LightAttention',
+    'Feature_projection',
     'Mlp',
     'GPRegressionModel',
     'STAB_DKL'

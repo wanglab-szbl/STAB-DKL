@@ -1,4 +1,4 @@
-"""Data augmentation by TR (Time Reversal) or TP (Transitive Property)."""
+"""Data augmentation by TR or TP"""
 
 import os
 from typing import Optional
@@ -86,8 +86,8 @@ if __name__ == "__main__":
     inputPrefix = "/home/DATA_2/hujiameng/work/5.stability_v7/data/train/C4238"
     tr_augment(pd.read_csv(f"{inputPrefix}.csv"), f"{inputPrefix}_tr")
 
-    # S2403
-    inputPrefix = "/home/DATA_2/hujiameng/work/5.stability_v7/data/train/S2403"
+    # Tm2403
+    inputPrefix = "/home/DATA_2/hujiameng/work/5.stability_v7/data/train/Tm2403"
     tr_augment(pd.read_csv(f"{inputPrefix}.csv"), f"{inputPrefix}_tr")
 
     # Ms154 TP augmentation

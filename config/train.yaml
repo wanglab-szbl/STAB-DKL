@@ -5,12 +5,12 @@ model:
   out_dim: 2
   grid_size: 100
   dropout: 0.5
-  hidden_size: 1024
+  hidden_size: 1280
 
 # Training settings
 training:
   epochs: 50
-  lr: [1e-2, 5e-3, 1e-3, 1e-4]
+  lr: [1e-4, 1e-3, 5e-3, 1e-2]
   min_save_epoch: 30
   lr_gp: 1e-2
   betas: [0.9, 0.99]
@@ -28,7 +28,7 @@ datasets:
   # Training datasets (support multiple)
   train:
     curated_ddg: "data/train/C4238_tr.csv"
-    curated_dtm: "data/train/S2403_tr.csv"
+    curated_dtm: "data/train/Tm2403_tr.csv"
     ms_ddg: "data/train/Ms154_tp_60000.csv"
   
   # Validation datasets
@@ -49,7 +49,7 @@ datasets:
 
 # Experiment settings
 experiment:
-  seeds: [3, 4, 5]
+  seeds: [3,4,5]
   save_dir: "weights/"
   result_dir: "results/"
 
