@@ -18,19 +18,29 @@ import torch.nn as nn
 logger = logging.getLogger(__name__)
 
     
-class Feature_projection(nn.Module):
-    """Feature Projection module for feature processing."""
+class LightAttention(nn.Module):
+    """Lightweight attention module for feature processing."""
     
-    def __init__(self, input_size: int, dropout: float = 0.25):
+    def __init__(self, input_size: int, kernel_size: int = 5, dropout: float = 0.25):
         """
+        Initialize LightAttention.
         
         Args:
             input_size: Input feature dimension
+            kernel_size: Convolution kernel size
             dropout: Dropout rate
         """
         super().__init__()
         
-        self.fc = nn.Linear(input_size, input_size)
+        self.feature_conv = nn.Conv1d(
+            input_size, input_size, kernel_size,
+            stride=1, padding=kernel_size // 2
+        )
+        self.attention_conv = nn.Conv1d(
+            input_size, input_size, kernel_size,
+            stride=1, padding=kernel_size // 2
+        )
+        self.softmax = nn.Softmax(dim=-1)
         self.dropout = nn.Dropout(dropout)
     
     def forward(self, x: torch.Tensor) -> torch.Tensor:
@@ -43,7 +53,10 @@ class Feature_projection(nn.Module):
         Returns:
             Output tensor [batch_size, features]
         """
-        output = self.dropout(self.fc(x))
+        x = x.unsqueeze(-1)
+        features = self.dropout(self.feature_conv(x))
+        attention = self.attention_conv(x)
+        output = (features * self.softmax(attention)).squeeze(-1)
         return output
 
 
@@ -102,7 +115,7 @@ class GPRegressionModel(gpytorch.models.ExactGP):
             train_x: Training features (can be None for prediction mode)
             train_y: Training labels (can be None for prediction mode)
             likelihood: GP likelihood
-            la: Feature_projection network (can be None)
+            la: LA network (can be None)
             mlp: MLP for dimensionality reduction
             out_dim: Output dimension
             grid_size: Grid size for interpolation kernel
@@ -186,7 +199,7 @@ class STAB_DKL(nn.Module):
         self.hidden_size = hidden_size
         
         # Shared feature extractor
-        self.la = Feature_projection(input_dim, dropout=dropout)
+        self.la = LightAttention(input_dim, dropout=dropout)
         
         # Task-specific MLPs
         self.mlp_ddg = Mlp(input_dim, out_dim, dropout, hidden_size)

@@ -82,8 +82,7 @@ mmseqs createindex uniref90_DB tmp
 > **Important:** STAB-DKL currently expects the database version `uniref90_2022_05.fa` to ensure reproducibility and compatibility.
 
 ### 5. Download model weights
-Pretrained model weights are available from Zenodo:
-
+Pretrained model weights are available from Zenodo: [LINK](https://zenodo.org/records/20339667?preview=1&token=eyJhbGciOiJIUzUxMiIsImlhdCI6MTc5MDIxOTQ3MywiZXhwIjoxODIxNzQzOTk5fQ.eyJpZCI6ImY0ZmI4ZTlmLTBhMWMtNGY5OS1hMmQzLTVjMTU0MWI5Y2E4OCIsImRhdGEiOnt9LCJyYW5kb20iOiIzOGM2YzNhOTAyMGQxYjc0MDA1ZWMwMjZjOTVmZGJkOSJ9.v-bUybEJDR1YFUKMXJZAFtPpNpSdNUuLsV_wlWTCYYf9g_PGYAULpYV5UeyH_W0ybZXOzgMdsAdByjI6TsT7UA)  
 Download and extract the files from Zenodo into the corresponding directories.
 
 ### 6. Set Up the Python Environment
