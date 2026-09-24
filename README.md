@@ -1,7 +1,7 @@
 # STAB-DKL
 multi-task fusion deep kernel learning for protein stability prediction and stabilizing mutations prioritization
 ![picture 0](./framework.png)
-For details on ThermoMPNN training and methodology, please see the accompanying [paper]().
+For details on STAB-DKL training and methodology, please see the accompanying [paper]().
 
 
 # Table of Contents
@@ -13,7 +13,7 @@ For details on ThermoMPNN training and methodology, please see the accompanying 
 - [Model Training](#model-training)
 - [Project Structure](#project-structure)
 - [Citation](#citation)
-- [Acknowledgements](#ccknowledgements)
+- [Acknowledgements](#acknowledgements)
 - [License](#license)
 
 
@@ -22,6 +22,8 @@ For details on ThermoMPNN training and methodology, please see the accompanying 
 STAB-DKL requires an NVIDIA GPU with CUDA support to run. 
 
 ### System Requirements
+STAB-DKL is designed to run with NVIDIA GPU acceleration.
+GPU acceleration is strongly recommended for efficient inference and MSA generation.
 - GPU: NVIDIA GPU with CUDA 11.8+ support
 - OS: Linux (Ubuntu 22.04 recommended)
 
@@ -84,14 +86,11 @@ mmseqs createindex uniref90_DB tmp
 ### 5. Download model weights
 Pretrained model weights are available from Zenodo: [LINK](https://zenodo.org/records/20339667?preview=1&token=eyJhbGciOiJIUzUxMiIsImlhdCI6MTc5MDIxOTQ3MywiZXhwIjoxODIxNzQzOTk5fQ.eyJpZCI6ImY0ZmI4ZTlmLTBhMWMtNGY5OS1hMmQzLTVjMTU0MWI5Y2E4OCIsImRhdGEiOnt9LCJyYW5kb20iOiIzOGM2YzNhOTAyMGQxYjc0MDA1ZWMwMjZjOTVmZGJkOSJ9.v-bUybEJDR1YFUKMXJZAFtPpNpSdNUuLsV_wlWTCYYf9g_PGYAULpYV5UeyH_W0ybZXOzgMdsAdByjI6TsT7UA)  
 Download and extract the files from Zenodo into the corresponding directories.
-- features.tar.gz: extract into the data/ directory.
 - vanilla_model_weights.tar.gz: extract into the project root directory.
 
 After extraction, the directory structure should look like:
 ```
 STAB-DKL/
-├── data/
-│   └── features              # extracted feature files
 ├── vanilla_model_weights     # model weight
 ```
 
@@ -106,16 +105,18 @@ source .venv/bin/activate
 ```
 
 ### 7. Download Features for Reproducing Model Training (Optional)
-Precomputed training features used for model development are available on Zenodo: http.  
+Precomputed training features used for model development are available on Zenodo: [LINK](https://zenodo.org/records/20339667?preview=1&token=eyJhbGciOiJIUzUxMiIsImlhdCI6MTc5MDIxOTQ3MywiZXhwIjoxODIxNzQzOTk5fQ.eyJpZCI6ImY0ZmI4ZTlmLTBhMWMtNGY5OS1hMmQzLTVjMTU0MWI5Y2E4OCIsImRhdGEiOnt9LCJyYW5kb20iOiIzOGM2YzNhOTAyMGQxYjc0MDA1ZWMwMjZjOTVmZGJkOSJ9.v-bUybEJDR1YFUKMXJZAFtPpNpSdNUuLsV_wlWTCYYf9g_PGYAULpYV5UeyH_W0ybZXOzgMdsAdByjI6TsT7UA)  
+Download and extract the files from Zenodo into the corresponding directories.
+- features.tar.gz: extract into the data/ directory.
+
+After extraction, the directory structure should look like:
+```
+STAB-DKL/
+├── data/
+│   └── features              # extracted feature files
+```
 This step is **optional** and is only required if you want to **reproduce model training**.  
 For standard inference and prediction tasks, downloading these features is **not necessary**.
-After downloading, place the extracted directory under:
-
-```txt
-data/
-# Extract files
-tar zxvf features.tar.gz 
-```
 
 # Model Inference
 ## Input Preparation
@@ -150,8 +151,9 @@ python scripts/clean_pdb.py \
 
 The preprocessing script can:
 
-- Keep only the specified chain and 20 standard amino acids
-- Renumber residues to start from **1** and Fix discontinuous residue indexing
+- Keep only the specified chain and 20 standard amino acids.
+- Non-standard residues, ligands, ions, and other heteroatoms should be removed.
+- Renumber residues to start from **1** and Fix discontinuous residue indexing.
 
 ### Generate Saturation Mutation Input File
 
@@ -191,7 +193,7 @@ The input file must contain mutation information in a tabular format (CSV/TSV) w
 | `chain` | Chain identifier in the structure. |
 | `position` | Mutation position. |
 | `wtAA` | Wild-type amino acid at the mutation position. |
-| `mutAA` | Mutant amino acid at the mutation position.. |
+| `mutAA` | Mutant amino acid at the mutation position. |
 | `wt_seq` | Full wild-type protein sequence. |
 | `mut_seq` | Full mutated protein sequence. |
 
@@ -202,7 +204,7 @@ At least **one** of the following columns must be provided:
 | Column | Description |
 |---|---|
 | `seq_id` | User-defined sequence identifier used in the output. |
-| `pdb` | Structure identifier (does not need to be an official PDB ID). If provided, `seq_id` will be automatically generated as `pdb_chain` (e.g., `1qg8 A` → `1qg8_A`). |
+| `pdb` | Structure identifier (does not need to be an official PDB ID). If provided, `seq_id` will be automatically generated as `pdb_chain` (e.g., `1qg8` + `A` → `1qg8_A`). |
 
 #### Structure file specification
 
@@ -215,7 +217,7 @@ If `pdb_file` is not provided, users must specify `--pdb_dir` during inference.
 STAB-DKL will automatically search for the structure file using:
 
 ```text
-{pdb_dir}/{seq_id}.lower()_model.pdb
+{pdb_dir}/{seq_id}.lower()_model.pdb (e.g., "data/af3_pdb/1qg8_a_model.pdb")
 ```
 
 ## Run Inference
@@ -238,7 +240,7 @@ python -u predict_pipeline.py \
     --esm2_path facebook/esm2_t33_650M_UR50D \
     --mmseqs_cmd /path/to/mmseqs/bin/mmseqs \
     --mmseqs_db /path/to/uniref90_DB_gpu \
-    --device cuda:0
+    --device cuda:0 \
     --batch_size 1024
 ```
 
@@ -306,7 +308,7 @@ These parameters are only required if `--msa_file` is **not provided**.
 
 | Argument | Required | Description |
 |---|---:|---|
-| `--force_chain_A` | No | Force all chain identifiers to `A`. |
+| `--force_chain_A` | No | Force the chain identifier to `A` when processing predicted structures. This is useful when the input `chain` is derived from the original PDB and is used only for sequence identification.|
 
 #### Inference Settings
 
