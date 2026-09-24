@@ -84,6 +84,16 @@ mmseqs createindex uniref90_DB tmp
 ### 5. Download model weights
 Pretrained model weights are available from Zenodo: [LINK](https://zenodo.org/records/20339667?preview=1&token=eyJhbGciOiJIUzUxMiIsImlhdCI6MTc5MDIxOTQ3MywiZXhwIjoxODIxNzQzOTk5fQ.eyJpZCI6ImY0ZmI4ZTlmLTBhMWMtNGY5OS1hMmQzLTVjMTU0MWI5Y2E4OCIsImRhdGEiOnt9LCJyYW5kb20iOiIzOGM2YzNhOTAyMGQxYjc0MDA1ZWMwMjZjOTVmZGJkOSJ9.v-bUybEJDR1YFUKMXJZAFtPpNpSdNUuLsV_wlWTCYYf9g_PGYAULpYV5UeyH_W0ybZXOzgMdsAdByjI6TsT7UA)  
 Download and extract the files from Zenodo into the corresponding directories.
+- features.tar.gz: extract into the data/ directory.
+- vanilla_model_weights.tar.gz: extract into the project root directory.
+
+After extraction, the directory structure should look like:
+```
+STAB-DKL/
+├── data/
+│   └── features              # extracted feature files
+├── vanilla_model_weights     # model weight
+```
 
 ### 6. Set Up the Python Environment
 From the STAB-DKL directory, run:
@@ -341,7 +351,6 @@ STAB-DKL/
 ├── example/                 # Example input/output files
 ├── paper_resources/         # Test-set predictions used in the manuscript
 ├── scripts/                 # Utility scripts
-├── vanilla_model_weights/   # Pretrained model weights
 
 ├── prepareData.py           # Prepare sequences, structures, and datasets
 ├── data_augment.py          # TP/TR augmentation and sampling
