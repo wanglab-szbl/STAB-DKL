@@ -84,7 +84,7 @@ mmseqs createindex uniref90_DB tmp
 > **Important:** STAB-DKL currently expects the database version `uniref90_2022_05.fa` to ensure reproducibility and compatibility.
 
 ### 5. Download model weights
-Pretrained model weights are available from Zenodo: [LINK](https://zenodo.org/records/20339667?preview=1&token=eyJhbGciOiJIUzUxMiIsImlhdCI6MTc5MDIxOTQ3MywiZXhwIjoxODIxNzQzOTk5fQ.eyJpZCI6ImY0ZmI4ZTlmLTBhMWMtNGY5OS1hMmQzLTVjMTU0MWI5Y2E4OCIsImRhdGEiOnt9LCJyYW5kb20iOiIzOGM2YzNhOTAyMGQxYjc0MDA1ZWMwMjZjOTVmZGJkOSJ9.v-bUybEJDR1YFUKMXJZAFtPpNpSdNUuLsV_wlWTCYYf9g_PGYAULpYV5UeyH_W0ybZXOzgMdsAdByjI6TsT7UA)  
+Pretrained model weights are available from Zenodo: [LINK](https://zenodo.org/records/20339667)  
 Download and extract the files from Zenodo into the corresponding directories.
 - vanilla_model_weights.tar.gz: extract into the project root directory.
 
@@ -105,7 +105,7 @@ source .venv/bin/activate
 ```
 
 ### 7. Download Features for Reproducing Model Training (Optional)
-Precomputed training features used for model development are available on Zenodo: [LINK](https://zenodo.org/records/20339667?preview=1&token=eyJhbGciOiJIUzUxMiIsImlhdCI6MTc5MDIxOTQ3MywiZXhwIjoxODIxNzQzOTk5fQ.eyJpZCI6ImY0ZmI4ZTlmLTBhMWMtNGY5OS1hMmQzLTVjMTU0MWI5Y2E4OCIsImRhdGEiOnt9LCJyYW5kb20iOiIzOGM2YzNhOTAyMGQxYjc0MDA1ZWMwMjZjOTVmZGJkOSJ9.v-bUybEJDR1YFUKMXJZAFtPpNpSdNUuLsV_wlWTCYYf9g_PGYAULpYV5UeyH_W0ybZXOzgMdsAdByjI6TsT7UA)  
+Precomputed training features used for model development are available on Zenodo: [LINK](https://zenodo.org/records/20339667)  
 Download and extract the files from Zenodo into the corresponding directories.
 - features.tar.gz: extract into the data/ directory.
 
@@ -388,4 +388,4 @@ If you use STAB-DKL, please also consider citing the corresponding original work
 
 # License
 
-This project is licensed under the MIT License. See the `LICENSE` file for details.
+This project is licensed under the polyform noncommercial license 1.0.0. See the `LICENSE` file for details.
