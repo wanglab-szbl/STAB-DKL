@@ -37,7 +37,7 @@ source ~/.bashrc  # or ~/.zshrc if using zsh
 
 ### 2. Clone the Repository
 ```
-git clone git@github.com:gumingmu/STAB-DKL.git
+git clone git@github.com:wanglab-szbl/STAB-DKL.git
 ```
 
 ### 3. Install MMseqs2
