@@ -365,6 +365,8 @@ STAB-DKL/
 # Citation
 If you use STAB-DKL in your research, please cite:
 
+Hu, J., & Wang, C. (2026). Multi-task deep kernel learning for uncertainty-aware prediction of protein stability changes. LangTaoSha Preprint Server. https://doi.org/10.65215/LTSpreprints.2026.09.30.000357 
+
 # Acknowledgements
 
 STAB-DKL builds upon several excellent open-source tools and resources.
